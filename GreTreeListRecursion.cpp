@@ -1,6 +1,5 @@
 /* 
  * File:   GreTreeListRecursion.c
- * Author: Prosenjit Banerjee
  *
  * Created on 15 October, 2016, 3:22 PM
  */
