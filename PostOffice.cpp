@@ -274,8 +274,8 @@ typedef struct
    btrt,         bot,    btlt,        lft ;
 } Box ;
 
-Box sBox = {'⁄', 'ƒ', 'ø', '≥', 'Ÿ', 'ƒ', '¿', '≥'} ;
-Box dBox = {'…', 'Õ', 'ª', '∫', 'º', 'Õ', '»', '∫'} ;
+Box sBox = {'√ö', '√Ñ', '¬ø', '¬≥', '√ô', '√Ñ', '√Ä', '¬≥'} ;
+Box dBox = {'√â', '√ç', '¬ª', '¬∫', '¬º', '√ç', '√à', '¬∫'} ;
 
 /* Draw the Box
    Parameters : box, topX, topY, Width, Height */
@@ -435,13 +435,13 @@ int printInfo(Info *f, int y)
    drawBox(&dBox, x, y, wd, ht) ;  /* Draw the outer box */
 
    /* Print the colulmn knobs */
-   gotoxy(x1, y) ;  putchar('—') ;     /* top - on first col seperator */
-   gotoxy(x2, y) ;  putchar('À') ;     /* top - on second col seperator */
-   gotoxy(x3, y) ;  putchar('—') ;     /* top - on third col seperator */
+   gotoxy(x1, y) ;  putchar('√ë') ;     /* top - on first col seperator */
+   gotoxy(x2, y) ;  putchar('√ã') ;     /* top - on second col seperator */
+   gotoxy(x3, y) ;  putchar('√ë') ;     /* top - on third col seperator */
    y2 = y + ht-1 ;
-   gotoxy(x1, y2) ;  putchar('œ') ;     /* bot - on first col seperator */
-   gotoxy(x2, y2) ;  putchar(' ') ;     /* bot - on second col seperator */
-   gotoxy(x3, y2) ;  putchar('œ') ;     /* bot - on third col seperator */
+   gotoxy(x1, y2) ;  putchar('√è') ;     /* bot - on first col seperator */
+   gotoxy(x2, y2) ;  putchar('√ä') ;     /* bot - on second col seperator */
+   gotoxy(x3, y2) ;  putchar('√è') ;     /* bot - on third col seperator */
 
 
    /* Print all the labels and values */
@@ -451,11 +451,11 @@ int printInfo(Info *f, int y)
    {
      /* The first part */
      gotoxy(x+1, y2) ; printf("%*s", f->maxLen1, f->data[i].label) ;
-     gotoxy(x1,  y2) ; printf("≥%s", f->data[i].value) ;
-     gotoxy(x2,  y2) ; putchar('∫') ;
+     gotoxy(x1,  y2) ; printf("¬≥%s", f->data[i].value) ;
+     gotoxy(x2,  y2) ; putchar('¬∫') ;
   
      /* The second part */
-     gotoxy(x3,  y2) ; putchar('≥') ;
+     gotoxy(x3,  y2) ; putchar('¬≥') ;
      if(k < f->count)
      {
         gotoxy(x2+2, y2) ; printf("%*s", f->maxLen3, f->data[k].label) ;
@@ -469,14 +469,14 @@ int printInfo(Info *f, int y)
      {
         /* Row border */
         for(j = 0 ; j < wd ; j++)
-        {    gotoxy(x+j, y2) ; putchar('ƒ') ;
+        {    gotoxy(x+j, y2) ; putchar('√Ñ') ;
         }
   
-        gotoxy(x,  y2) ;      putchar('«') ;
-        gotoxy(x1, y2) ;      putchar('≈') ;
-        gotoxy(x2, y2) ;      putchar('◊');
-        gotoxy(x3, y2) ;      putchar('≈') ;
-        gotoxy(x4, y2) ;      putchar('∂') ;
+        gotoxy(x,  y2) ;      putchar('√á') ;
+        gotoxy(x1, y2) ;      putchar('√Ö') ;
+        gotoxy(x2, y2) ;      putchar('√ó');
+        gotoxy(x3, y2) ;      putchar('√Ö') ;
+        gotoxy(x4, y2) ;      putchar('¬∂') ;
   
         y2 ++ ;
      }
@@ -517,13 +517,13 @@ int printTimeChart(TimeChart *t, int y)
    {     gotoxy(x+i, y+2) ; putchar(dBox.top) ;
          gotoxy(x+i, y+4) ; putchar(dBox.top) ;
    }
-   gotoxy(x, y+2) ;  putchar('Ã') ;           /* on left border */
-   gotoxy(x, y+4) ;  putchar('Ã') ;           /* on left border */
-   gotoxy(x2, y+2) ; putchar('—') ;           /* on column border */
-   gotoxy(x2, y+3) ; putchar('≥') ;           /* on column border */
-   gotoxy(x2, y+4) ; putchar('ÿ') ;           /* on column border */
-   gotoxy(x2+TIMEWID+1, y+2) ; putchar('π') ;   /* on right border */
-   gotoxy(x2+TIMEWID+1, y+4) ; putchar('π') ;   /* on right border */
+   gotoxy(x, y+2) ;  putchar('√å') ;           /* on left border */
+   gotoxy(x, y+4) ;  putchar('√å') ;           /* on left border */
+   gotoxy(x2, y+2) ; putchar('√ë') ;           /* on column border */
+   gotoxy(x2, y+3) ; putchar('¬≥') ;           /* on column border */
+   gotoxy(x2, y+4) ; putchar('√ò') ;           /* on column border */
+   gotoxy(x2+TIMEWID+1, y+2) ; putchar('¬π') ;   /* on right border */
+   gotoxy(x2+TIMEWID+1, y+4) ; putchar('¬π') ;   /* on right border */
 
    /* Print the headings */
    gotoxy(x1, y+3) ; printf(t->head1) ;
@@ -536,7 +536,7 @@ int printTimeChart(TimeChart *t, int y)
    {
      /* Service and Timing */
      gotoxy(x1, y2) ; printf(t->vals[i].service) ;
-     gotoxy(x2, y2) ; printf("≥") ;
+     gotoxy(x2, y2) ; printf("¬≥") ;
   
      printHrMin(t->vals[i].fTime) ;
      printf(" to ") ;
@@ -547,18 +547,18 @@ int printTimeChart(TimeChart *t, int y)
      {
         /* Row border */
         for(j = 0 ; j < t->maxLen+2 ; j++)
-        {    gotoxy(x+j, y2) ; putchar('ƒ') ;
+        {    gotoxy(x+j, y2) ; putchar('√Ñ') ;
         }
   
-        gotoxy(x, y2) ;            putchar('«') ;
-        gotoxy(x2, y2) ;           putchar('≈');
-        gotoxy(x2+TIMEWID+1, y2) ; putchar('∂') ;
+        gotoxy(x, y2) ;            putchar('√á') ;
+        gotoxy(x2, y2) ;           putchar('√Ö');
+        gotoxy(x2+TIMEWID+1, y2) ; putchar('¬∂') ;
   
         y2 ++ ;
      }
    }
 
-   gotoxy(x2, y2) ;           putchar('œ');
+   gotoxy(x2, y2) ;           putchar('√è');
 
    promptAndInput(JUSTWAIT, SCRNHT) ;
 
@@ -591,13 +591,13 @@ int printRateChart(RateChart *r, int x, int y)
    for(i = 0 ; i < r->maxLen+2 ; i++)
    {     gotoxy(x+i, y+3) ; putchar(dBox.top) ;
    }
-   gotoxy(x, y+3) ;  putchar('Ã') ;           /* on left border */
-   gotoxy(x2, y+3) ; putchar('ÿ') ;           /* on column border */
-   gotoxy(x2+hLen2+1, y+3) ; putchar('π') ;   /* on right border */
+   gotoxy(x, y+3) ;  putchar('√å') ;           /* on left border */
+   gotoxy(x2, y+3) ; putchar('√ò') ;           /* on column border */
+   gotoxy(x2+hLen2+1, y+3) ; putchar('¬π') ;   /* on right border */
 
    /* Print the headings */
    gotoxy(x1, y+2) ; printf(r->head1) ;
-   gotoxy(x2, y+2) ; printf("≥%-*s", hLen2, r->head2) ;
+   gotoxy(x2, y+2) ; printf("¬≥%-*s", hLen2, r->head2) ;
 
 
    /* Print all the items and rates */
@@ -606,24 +606,24 @@ int printRateChart(RateChart *r, int x, int y)
    {
      /* Item and Price */
      gotoxy(x1, y2) ; printf(r->vals[i].item) ;
-     gotoxy(x2, y2) ; printf("≥%*d", hLen2, r->vals[i].price) ;
+     gotoxy(x2, y2) ; printf("¬≥%*d", hLen2, r->vals[i].price) ;
      y2 ++ ;
   
      if(i < r->count-1)
      {
         /* Row border */
         for(j = 0 ; j < r->maxLen+2 ; j++)
-        {   gotoxy(x+j, y2) ; putchar('ƒ') ;
+        {   gotoxy(x+j, y2) ; putchar('√Ñ') ;
         }
   
-        gotoxy(x, y2) ;          putchar('«') ;
-        gotoxy(x2, y2) ;         putchar('≈');
-        gotoxy(x2+hLen2+1, y2) ; putchar('∂') ;
+        gotoxy(x, y2) ;          putchar('√á') ;
+        gotoxy(x2, y2) ;         putchar('√Ö');
+        gotoxy(x2+hLen2+1, y2) ; putchar('¬∂') ;
         y2 ++ ;
      }
    }
 
-   gotoxy(x2, y2) ;         putchar('œ');
+   gotoxy(x2, y2) ;         putchar('√è');
 
    return ht ;
 } /* End of printRateChart */
